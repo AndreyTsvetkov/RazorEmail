@@ -75,7 +75,7 @@ namespace RazorEmail
 
             email.To = toAddressList.ToArray();
 
-            email.Subject = templateService.Parse(email.Subject, model, email.Subject);// razorEngine.RenderContentToString(email.Subject, model);
+            email.Subject = templateService.Parse(email.Subject, model, null, null);
 
             if(email.Subject.Contains("\n")) throw new ApplicationException("The subject line cannot contain any newline characters");
 
@@ -87,8 +87,8 @@ namespace RazorEmail
 
                 bool templateExists = fileContent != null;
 
-                view.Content = templateExists ? templateService.Parse(fileContent, model, viewTemplateName) :
-                                                templateService.Parse(view.Content, model, viewTemplateName); //razorEngine.RenderContentToString(view.Content, model);
+                view.Content = templateExists ? templateService.Parse(fileContent, model, null, viewTemplateName) :
+                                                templateService.Parse(view.Content, model, null, viewTemplateName); 
             }
 
             return email;
